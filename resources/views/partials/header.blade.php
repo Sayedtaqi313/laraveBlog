@@ -11,7 +11,7 @@
                         <li><a href="{{ route('home') }}">Home</a></li>
                   
                         <li><a href="{{ route('about') }}">About</a></li>
-                        <li><a href="{{ route('contact') }}">Contact</a></li>
+                        <li><a href="{{ route('show.contact') }}">Contact</a></li>
                         @auth
                         <li class="has-dropdown">
                             <a href="courses.html">{{ auth()->user()->name }}</a>

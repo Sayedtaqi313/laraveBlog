@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('excerpt');
             $table->text('body');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('cate_id');
-            $table->foreign('cate_id')->references('id')->on('categories');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

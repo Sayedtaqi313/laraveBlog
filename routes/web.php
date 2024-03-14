@@ -1,7 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,21 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
 
-Route::get('/post',function() {
-    return view('post');
-})->name('post');
 
-Route::get('/about',function() {
-    return view('about');
-})->name('about');
-
-Route::get('/contact',function() {
-    return view('contact');
-})->name('contact');
+Route::get('/',[HomeController::class,'index']);
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('post/{slug}',[PostController::class,'showPost'])->name('show.post');
+Route::post('post/addComment',[PostController::class,'addComment'])->name('add.comment');
+Route::get('about',AboutController::class)->name('about');
+Route::get('contact',[ContactController::class,'show'])->name('show.contact');
+Route::post('contact',[ContactController::class,'store'])->name('store.contact');

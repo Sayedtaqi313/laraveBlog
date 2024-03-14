@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\User;
+use App\Models\Category;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -22,10 +24,10 @@ class PostFactory extends Factory
             //
             'title' => $title,
             'slug' => Str::slug($title),
-            'excerpt' => fake()->sentence(3),
-            'body' => fake()->sentence(5),
-            'user_id' => fake()->numberBetween(1,3),
-            'cate_id' => fake()->numberBetween(1,3),
+            'excerpt' => fake()->sentence(5),
+            'body' => fake()->paragraph(5),
+            'user_id' => User::all()->random()->id,
+            'category_id' => Category::all()->random()->id,
         ];
     }
 }

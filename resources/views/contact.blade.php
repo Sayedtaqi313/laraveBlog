@@ -35,38 +35,63 @@
                     <h2>Message Us</h2>
                 </div>
                 <div class="col-md-6">
-                    <form action="#">
+                    @if (session()->has('success'))
+                    <x-alert :status="'success'" :message="session()->get('success')" />
+                    @endif
+                    @if (session()->has('error'))
+                    <x-alert :status="'error'" :message="session()->get('error')" />
+                    @endif
+                    <form action="{{ route('store.contact') }}" method="POST">
+                        @csrf
                         <div class="row form-group">
                             <div class="col-md-6">
                                 <!-- <label for="fname">First Name</label> -->
-                                <input type="text" id="fname" class="form-control" placeholder="Your firstname">
+                                <input type="text" id="fname" name="firstName" value="{{ old('fristName') }}"
+                                    class="form-control" placeholder="Your firstname">
+                                @error('firstName')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                             <div class="col-md-6">
                                 <!-- <label for="lname">Last Name</label> -->
-                                <input type="text" id="lname" class="form-control" placeholder="Your lastname">
+                                <input type="text" id="lname" name="lastName" value="{{ old('lastName') }}"
+                                    class="form-control" placeholder="Your lastname">
+                                @error('lastName')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <!-- <label for="email">Email</label> -->
-                                <input type="text" id="email" class="form-control" placeholder="Your email address">
+                                <input type="text" id="email" name="email" value="{{ old('email') }}"
+                                    class="form-control" placeholder="Your email address">
+                                @error('email')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <!-- <label for="subject">Subject</label> -->
-                                <input type="text" id="subject" class="form-control"
-                                    placeholder="Your subject of this message">
+                                <input type="text" id="subject" name="subject" value="{{ old('subject') }}"
+                                    class="form-control" placeholder="Your subject of this message">
+                                @error('subject')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <!-- <label for="message">Message</label> -->
-                                <textarea name="message" id="message" cols="30" rows="10" class="form-control"
+                                <textarea name="message" id="message" value="{{ old('message') }}" cols="30" rows="10" class="form-control"
                                     placeholder="Say something about us"></textarea>
+                                @error('message')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group">
