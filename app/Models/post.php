@@ -12,7 +12,7 @@ use App\Models\Comment;
 use App\Models\Image;
 
 
-class post extends Model
+class Post extends Model
 {
     use HasFactory;
     protected $fillable = ['title','slug','excerpt','body','user_id','category_id'];

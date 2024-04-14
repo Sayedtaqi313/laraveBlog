@@ -4,7 +4,7 @@
 
     @foreach ($recentposts as $recent_post)
         <div class="f-blog">
-            <a href="blog.html" class="blog-img"
+            <a href="{{ route('show.post',$recent_post->slug) }}" class="blog-img"
                 style="background-image: url({{ asset('storage/' . $recent_post->image->path) }});">
             </a>
             <div class="desc">

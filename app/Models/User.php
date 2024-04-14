@@ -10,7 +10,7 @@ use App\Models\Role;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Image;
-
+use App\Models\Category;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -51,5 +51,9 @@ class User extends Authenticatable
 
     public function image() {
         return $this->morphOne(Image::class , 'imageable');
+    }
+
+    public function category() {
+        return $this->hasOne(Category::class);
     }
 }

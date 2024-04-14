@@ -7,10 +7,9 @@
 
             @foreach ($categories as $category)
                 <li><a
-                        href="#">{{ $category->name }}<span>{{ $category->posts_count }}</span></a>
+                        href="{{ route('category.show',$category->slug) }}">{{ $category->name }}<span>{{ $category->posts_count }}</span></a>
                 </li>
             @endforeach
-
         </ul>
     </div>
 </div>

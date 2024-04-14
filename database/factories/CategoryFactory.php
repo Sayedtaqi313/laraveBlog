@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
@@ -21,7 +22,8 @@ class CategoryFactory extends Factory
         return [
             //
             'name' => $name,
-            'slug' => Str::slug($name)
+            'slug' => Str::slug($name),
+            'user_id' => User::all()->random()->id,
         ];
     }
 }

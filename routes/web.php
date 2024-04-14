@@ -2,10 +2,13 @@
 
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
+use Database\Factories\CategoryFactory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TagController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,3 +31,6 @@ Route::post('post/addComment',[PostController::class,'addComment'])->name('add.c
 Route::get('about',AboutController::class)->name('about');
 Route::get('contact',[ContactController::class,'show'])->name('show.contact');
 Route::post('contact',[ContactController::class,'store'])->name('store.contact');
+Route::get('category',[CategoryController::class,'index'])->name('category.index');
+Route::get('categories/{category}',[CategoryController::class,'show'])->name('category.show');
+Route::get('tags/{tag}',[TagController::class,'show'])->name('tag.show');
