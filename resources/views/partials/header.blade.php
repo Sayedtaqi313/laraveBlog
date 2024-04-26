@@ -21,7 +21,7 @@
                         <li><a href="{{ route('show.contact') }}">Contact</a></li>
                         @auth
                         <li class="has-dropdown">
-                            <a href="courses.html">{{ auth()->user()->name }}</a>
+                            <button class="btn ">{{ auth()->user()->name }}</button>
                             <ul class="dropdown">
                               <form method="POST" action="{{ route('logout') }}">
                                 @csrf

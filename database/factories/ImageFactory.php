@@ -21,7 +21,7 @@ class ImageFactory extends Factory
             //
             'name' => fake()->word(),
             'extension' => 'jpg',
-            'path' => 'images/' . fake()->randomElement($images)
+            'path' => 'images/posts/' . fake()->randomElement($images)
         ];
     }
 }
