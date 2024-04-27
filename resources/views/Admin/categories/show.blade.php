@@ -9,6 +9,11 @@
             max-width: 30%;
         }
 
+        .img-card {
+            display: flex !important;
+            justify-content: center;
+            align-content: center;
+        }
     </style>
 @endsection
 @section('wrapper')
@@ -28,7 +33,7 @@
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Categories</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ $category->name }} Posts</li>
                         </ol>
                     </nav>
                 </div>
@@ -59,25 +64,27 @@
                                 class="position-absolute top-50 product-show translate-middle-y"><i
                                     class="bx bx-search"></i></span>
                         </div>
-                        <div class="ms-auto"><a href="{{ route('admin.categories.create') }}"
+                        <div class="ms-auto"><a href="{{ route('admin.post.create') }}"
                                 class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New
-                                Category</a></div>
+                                Post</a></div>
                     </div>
                     <div class="table-responsive">
                         <table class="table mb-0">
                             <thead class="table-light">
                                 <tr>
-                                    <th>#CID</th>
-                                    <th>Name</th>
-                                    <th>Creator</th>
-                                    <th>Related Posts</th>
-                                    <th>Posts</th>
+                                    <th>#PID</th>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Excerpt</th>
                                     <th>Created At</th>
+                                    <th>Views</th>
+                                    <th>Status</th>
+                                    <th>View Details</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $category)
+                                @foreach ($category->posts as $post)
                                     <tr>
                                         <td>
                                             <div class="d-flex align-items-center">
@@ -86,28 +93,31 @@
                                                         aria-label="...">
                                                 </div>
                                                 <div class="ms-2">
-                                                    <h6 class="mb-0 font-14">#{{ $category->id }}</h6>
+                                                    <h6 class="mb-0 font-14">#{{ $post->id }}</h6>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>{{ $category->name }}</td>
-                                        <td>{{ $category->user->name }}</td>
-                                        <td><a class="btn btn-info" href="{{ route('admin.categories.show',$category->id) }}">View Posts</a></td>
-                                        <td>{{ count($category->posts) }}</td>
-                                        <td>{{ $category->created_at->diffForHumans() }}</td>
+                                        <td>{{ $post->title }}</td>
+                                        <td>{{ $post->category->name }}</td>
+                                        <td>{{ $post->excerpt }}</td>
+                                        <td>{{ $post->created_at->diffForHumans() }}</td>
+                                        <td>{{ $post->views }}</td>
+                                        <td>
+                                            <div
+                                                class="badge rounded-pill @if ($post->status == 'published') {{ 'text-info bg-light-info' }} @elseif($post->status == 'draft') {{ 'text-warning bg-light-warning' }} @else {{ 'text-danger bg-light-danger' }} @endif  p-2 text-uppercase px-3">
+                                                <i class='bx bxs-circle me-1'></i>{{ $post->status }}</div>
+                                        </td>
+                                        <td><button type="button" class="btn btn-primary btn-sm radius-30 px-4">View
+                                                Details</button></td>
                                         <td>
                                             <div class="d-flex order-actions">
-                                                <a href="{{ route('admin.categories.edit', $category->id) }}" class=""><i
+                                                <a href="{{ route('admin.post.edit', $post) }}" class=""><i
                                                         class='bx bxs-edit'></i></a>
-
-                                                    @can('notAllowedCategory',$category->name)
-                                                    <a href="#"
-                                                    onclick="event.preventDefault(); document.querySelector('#delete_form_{{ $category->id }}').submit()"
-                                                    class="ms-3"><i class='bx bxs-trash'></i></a> 
-                                                    @endcan
-
-                                                <form action="{{ route('admin.categories.destroy',$category->id) }}" method="POST"
-                                                    id="delete_form_{{ $category->id }}">
+                                                <a href="#"
+                                                    onclick="event.preventDefault(); document.querySelector('#delete_form_{{ $post->id }}').submit()"
+                                                    class="ms-3"><i class='bx bxs-trash'></i></a>
+                                                <form action="{{ route('admin.post.delete', $post) }}" method="POST"
+                                                    id="delete_form_{{ $post->id }}">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
@@ -117,7 +127,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $categories->links() }}
                     </div>
                 </div>
             </div>

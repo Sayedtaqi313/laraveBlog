@@ -14,7 +14,8 @@ class AdminCategoryController extends Controller
  
     public function index()
     {
-        //
+        $categories = Category::paginate(10);
+        return view('Admin.categories.index',compact('categories'));
     }
 
 
@@ -41,7 +42,8 @@ class AdminCategoryController extends Controller
  
     public function show($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('Admin.categories.show',compact('category'));
     }
 
 
@@ -56,13 +58,6 @@ class AdminCategoryController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(CategoryUpdateRequest $request, $id)
     {
         $category = Category::findorFail($id);
@@ -78,14 +73,13 @@ class AdminCategoryController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category_id = Category::where('name' , '=' , 'Uncategorized')->first()->id;
+        $category->posts()->update(['category_id' => $category_id]);
+        $category->delete();
+        return redirect()->route('admin.categories.index')->with('success','the category deleted successfully');
     }
 }
