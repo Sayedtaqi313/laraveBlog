@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => env('MAIL_MAILER', 'mailgun'),
 
     /*
     |--------------------------------------------------------------------------
@@ -43,6 +43,8 @@ return [
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
+            'auth_mode' => null,
+            'verify_peer' => false
         ],
 
         'ses' => [
@@ -92,10 +94,11 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => 'Contact@myblog.com',
+        'name' => 'myblog Contact'
     ],
 
+    'reply_to' => ['address' => 'Contact@myblog.com', 'name' => 'myblog Contact'],
     /*
     |--------------------------------------------------------------------------
     | Markdown Mail Settings

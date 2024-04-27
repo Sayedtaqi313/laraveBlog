@@ -9,7 +9,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="" />
-
+    @yield('head')
     <!-- Facebook and Twitter integration -->
     <meta property="og:title" content="" />
     <meta property="og:image" content="" />
@@ -22,11 +22,11 @@
     <meta name="twitter:card" content="" />
 
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900" rel="stylesheet">
-
+    <link href="{{ asset('blog_template/fonts/css.css') }}" rel="stylesheet">
     <!-- Animate.css -->
     <link rel="stylesheet" href="{{ asset('blog_template/css/animate.css') }}">
     <!-- Icomoon Icon Fonts-->
-    <link rel="stylesheet" href="{{ asset('blog_template/cssicomoon.css') }}">
+    <link rel="stylesheet" href="{{ asset('blog_template/css/icomoon.css') }}">
     <!-- Bootstrap  -->
     <link rel="stylesheet" href="{{ asset('blog_template/css/bootstrap.css') }}">
 

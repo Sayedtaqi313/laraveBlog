@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\Tag;
 use App\Models\Comment;
 use App\Models\Image;
+use App\Models\Category;
 class HomeController extends Controller
 
 {
@@ -29,9 +30,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-      $image = Image::findOrfail(1);
-      return $image->imageable;
+     
+        $posts = Post::withCount('comments')->paginate(8);
+        $recentPosts = Post::orderBy('id','desc')->take(5)->get();
+        $categories = Category::withCount('posts')->orderBy('posts_count','desc')->take(7)->get();
+        $tags = Tag::all();
+        return view('home',compact('posts','recentPosts','categories','tags'));
         
     }
 }

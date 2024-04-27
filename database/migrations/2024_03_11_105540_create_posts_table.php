@@ -19,9 +19,10 @@ return new class extends Migration
             $table->string('slug');
             $table->string('excerpt');
             $table->text('body');
+            $table->integer('views')->default(0);
+            $table->string("status")->default("published");
+            $table->foreignId('category_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('cate_id');
-            $table->foreign('cate_id')->references('id')->on('categories');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

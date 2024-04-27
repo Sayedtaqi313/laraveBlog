@@ -10,7 +10,7 @@ use App\Models\Post;
 class Comment extends Model
 {
     use HasFactory;
-
+    protected $fillable = ['textComment','user_id','post_id'];
     public function user() {
         return $this->belongsTo(User::class);
     }
