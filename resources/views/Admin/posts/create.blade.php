@@ -121,8 +121,6 @@
 @endsection
 
 @section('script')
-    <script src="https://cdn.tiny.cloud/1/idyan625klqknxfb5ckyuxck1g00rzuh3bi9rw9qmyxb43fe/tinymce/7/tinymce.min.js"
-        referrerpolicy="origin"></script>
     <script src="{{ asset('dashboard/assets/plugins/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
     <script src="https://cdn.tiny.cloud/1/idyan625klqknxfb5ckyuxck1g00rzuh3bi9rw9qmyxb43fe/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
@@ -142,85 +140,14 @@
                 placeholder: $(this).data('placeholder'),
                 allowClear: Boolean($(this).data('allow-clear')),
             });
-            $('.multiple-select').select2({
-                theme: 'bootstrap4',
-                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' :
-                    'style',
-                placeholder: $(this).data('placeholder'),
-                allowClear: Boolean($(this).data('allow-clear')),
-            });
+      
 
             setTimeout(() => {
                 $(".messages").fadeOut();
             }, 5000);
 
         })
-
-
-        tinymce.init({
-            selector: '.post_content',
-            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-<<<<<<< HEAD
-            toolbar_mode: "floating",
-=======
-            toolbar_mode : "floating",
->>>>>>> sayed
-            automatic_uploads: true,
-            image_title: true,
-            tinycomments_mode: 'embedded',
-            tinycomments_author: 'Author name',
-            mergetags_list: [{
-                    value: 'First.Name',
-                    title: 'First Name'
-                },
-                {
-                    value: 'Email',
-                    title: 'Email'
-                },
-            ],
-            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject(
-                "See docs to implement AI Assistant")),
-            images_upload_handler: function(blobinfo, success, failure) {
-                let formData = new FormData();
-                let _token = $('input[name=_token]').val();
-
-                let xhr = new XMLHttpRequest();
-                xhr.open("post", "{{ route('admin.upload_tinymce_image') }}");
-                xhr.onload = () => {
-<<<<<<< HEAD
-                    if (xhr.status != 200) {
-=======
-                    if(xhr.status != 200) {
->>>>>>> sayed
-                        failure("HTTP error" + xhr.status)
-                        return;
-                    }
-
-                    let json = JSON.parse(xhr.responseText)
-<<<<<<< HEAD
-                    if (!json || typeof json.location != "string") {
-=======
-                    if(!json || typeof json.location != "string"){
->>>>>>> sayed
-                        failure("invalid json request" + xhr.responseText)
-                        return;
-                    }
-                    success(json.location);
-                }
-                formData.append("_token", _token);
-                formData.append("file", blobinfo.blob(), blobinfo.filename());
-                xhr.send(formData);
-            }
-
-<<<<<<< HEAD
-
-        });
-=======
-          
-        });
-
       
->>>>>>> sayed
+
     </script>
 @endsection

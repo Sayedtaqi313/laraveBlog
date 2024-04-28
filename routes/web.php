@@ -2,8 +2,11 @@
 
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AdminControllers\AdminCommentController;
 use App\Http\Controllers\AdminControllers\AdminPostsController;
 use App\Http\Controllers\AdminControllers\DashboardController;
+use App\Http\Controllers\AdminControllers\AdminTagContoller;
+use App\Http\Controllers\AdminControllers\AdminCategoryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use Database\Factories\CategoryFactory;
@@ -11,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
-use App\Http\Controllers\AdminControllers\AdminTagContoller;
-
-
-use App\Http\Controllers\AdminControllers\AdminCategoryController;
 
 use App\Http\Controllers\AdminControllers\TinyMCEController;
 
@@ -61,6 +60,15 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','isAdmin'])->group(fu
     Route::get('tags',[AdminTagContoller::class,'index'])->name('tags');
     Route::get('tags/{tag}/show',[AdminTagContoller::class,'show'])->name('tags.show');
     Route::delete('tags/{tag}/destroy',[AdminTagContoller::class,'destroy'])->name('tags.destroy');
+
+    Route::get('comments',[AdminCommentController::class,'index'])->name('comments');
+    Route::get('comments/create',[AdminCommentController::class,'create'])->name('comment.create');
+    Route::post('comments/{comment/store',[AdminCommentController::class,'store'])->name('comment.store');
+    Route::get("comments/{comment}/edit",[AdminCommentController::class,'edit'])->name('comment.edit');
+    Route::patch('comments/{comment}/update',[AdminCommentController::class,'update'])->name('comment.update');
+    Route::get('comments/{comment}/show',[AdminCommentController::class,'show'])->name('comment.show');
+    Route::delete('comments/{comment}/delete',[AdminCommentController::class,'delete'])->name('comment.delete');
+
     
     Route::post('upload_tinymce_image',[TinyMCEController::class,'upload_tinymce_image'])->name('upload_tinymce_image');
 });
