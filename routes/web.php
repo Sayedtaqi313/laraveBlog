@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
+
+
+use App\Http\Controllers\AdminControllers\AdminCategoryController;
+
 use App\Http\Controllers\AdminControllers\TinyMCEController;
 
 /*
@@ -50,5 +54,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','isAdmin'])->group(fu
     Route::get('posts/{post}/edit',[AdminPostsController::class,'edit'])->name('post.edit');
     Route::put('posts/{post}/update',[AdminPostsController::class,'update'])->name('post.update');
     Route::delete('posts/{post}/delete',[AdminPostsController::class,'delete'])->name('post.delete');
+
+    Route::resource('categories', AdminCategoryController::class);
+
     Route::post('upload_tinymce_image',[TinyMCEController::class,'upload_tinymce_image'])->name('upload_tinymce_image');
 });

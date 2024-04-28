@@ -36,6 +36,25 @@
                 </li>
 
                 <li>
+<<<<<<< HEAD
+=======
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><i class='bx bx-menu'></i>
+                        </div>
+                        <div class="menu-title">Categories</div>
+                    </a>
+
+                    <ul>
+                        <li> <a href="{{ route('admin.categories.index') }}"><i class="bx bx-right-arrow-alt"></i>All Categories</a>
+                        </li>
+                        <li> <a href="{{ route('admin.categories.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Category</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+
+                <li>
+>>>>>>> sayed
                     <a class="has-arrow" href="javascript:;">
                         <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
                         </div>

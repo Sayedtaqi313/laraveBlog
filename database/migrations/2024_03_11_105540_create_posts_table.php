@@ -21,9 +21,14 @@ return new class extends Migration
             $table->text('body');
             $table->integer('views')->default(0);
             $table->string("status")->default("published");
+<<<<<<< HEAD:database/migrations/2024_03_11_052123_create_posts_table.php
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
+=======
+            $table->foreignId('category_id');
+            $table->unsignedBigInteger('user_id');
+>>>>>>> sayed:database/migrations/2024_03_11_105540_create_posts_table.php
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
