@@ -4,24 +4,25 @@
     <link rel="stylesheet" href="{{ asset('dashboard/assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}">
     <link href="{{ asset('dashboard/assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('dashboard/assets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
+    <link href="{{ asset('dashboard/assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
     <style>
-        .messages{
+        .messages {
             position: fixed;
-            left:70%;
+            left: 70%;
             border-radius: 5px;
             z-index: 100 !important;
-            max-width:30%;
+            max-width: 30%;
         }
     </style>
 @endsection
 
 @section('wrapper')
     @if (session()->has('success'))
-    <div class="messages alert alert-success">
-        <strong>Success </strong> <span>{{ session()->get('success') }}</span>
-    </div> 
+        <div class="messages alert alert-success">
+            <strong>Success </strong> <span>{{ session()->get('success') }}</span>
+        </div>
     @endif
-    
+
     <div class="page-wrapper">
         <div class="page-content">
             <!--breadcrumb-->
@@ -42,18 +43,18 @@
                                             <label for="inputProductTitle" class="form-label">Post Title</label>
                                             <input type="text" class="form-control" id="inputProductTitle"
                                                 placeholder="Enter post title" name="title" value="{{ old('titile') }}">
-                                                @error('title')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
+                                            @error('title')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                         <div class="mb-3">
                                             <label for="inputProductDescription" class="form-label">Post Excerpt</label>
                                             <textarea class="form-control" id="inputProductDescription" rows="3" name="excerpt">
                                                 {{ old('excerpt') }}
                                             </textarea>
-                                           @error('excerpt')
-                                           <small class="text-danger">{{ $message }}</small>
-                                           @enderror
+                                            @error('excerpt')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                         <div class="mb-3">
 
@@ -62,9 +63,10 @@
                                                     <div class="border p-3 rounded">
                                                         <div class="mb-3">
                                                             <label class="form-label">Post Category</label>
-                                                            <select class="single-select" name="category_id"> 
+                                                            <select class="single-select" name="category_id">
                                                                 @foreach ($categories as $key => $value)
-                                                                    <option value="{{ $value }}">{{ $key }}
+                                                                    <option value="{{ $value }}">
+                                                                        {{ $key }}
                                                                     </option>
                                                                 @endforeach
 
@@ -78,6 +80,10 @@
                                             </div>
 
 
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Add Tags</label>
+                                            <input type="text" class="form-control" name="tags" data-role="tagsinput">
                                         </div>
                                         <div class="mb-3">
                                             <label for="inputProductDescription" class="form-label">Post Content</label>
@@ -100,7 +106,7 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+
                             </div><!--end row-->
                         </form>
                     </div>
@@ -114,9 +120,10 @@
 @endsection
 
 @section('script')
-    <script src="https://cdn.tiny.cloud/1/idyan625klqknxfb5ckyuxck1g00rzuh3bi9rw9qmyxb43fe/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/idyan625klqknxfb5ckyuxck1g00rzuh3bi9rw9qmyxb43fe/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
     <script src="{{ asset('dashboard/assets/plugins/select2/js/select2.min.js') }}"></script>
-
+    <script src="{{ asset('dashboard/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
     <script src="{{ asset('dashboard/assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
     <script>
         $(document).ready(function() {
@@ -150,7 +157,7 @@
             selector: '.post_content',
             plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-            toolbar_mode : "floating",
+            toolbar_mode: "floating",
             automatic_uploads: true,
             image_title: true,
             tinycomments_mode: 'embedded',
@@ -173,13 +180,13 @@
                 let xhr = new XMLHttpRequest();
                 xhr.open("post", "{{ route('admin.upload_tinymce_image') }}");
                 xhr.onload = () => {
-                    if(xhr.status != 200) {
+                    if (xhr.status != 200) {
                         failure("HTTP error" + xhr.status)
                         return;
                     }
 
                     let json = JSON.parse(xhr.responseText)
-                    if(!json || typeof json.location != "string"){
+                    if (!json || typeof json.location != "string") {
                         failure("invalid json request" + xhr.responseText)
                         return;
                     }
@@ -190,9 +197,7 @@
                 xhr.send(formData);
             }
 
-          
-        });
 
-      
+        });
     </script>
 @endsection

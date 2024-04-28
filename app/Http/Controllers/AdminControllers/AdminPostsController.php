@@ -43,6 +43,18 @@ class AdminPostsController extends Controller
                 "path" => $path
             ]);
 
+            $tags = explode(',',$postRequest->input('tags'));
+            if(count($tags)){
+                $tags_id = [];
+                foreach($tags as $tag) {
+                  $tag_ob = $post->tags()->create(
+                        ['name' => $tag]
+                    );
+                    $tags_id[] = $tag_ob->id;
+                }
+                
+                $post->tags()->sync($tags_id);
+            }
             return redirect()->route('admin.post.create')->with('success','the post added successfully');
         }else {
             return redirect()->route('admin.post.create')->with('error','there is a error occured !');
@@ -50,6 +62,7 @@ class AdminPostsController extends Controller
     }
 
     public function edit(Post $post) {
+        return $post->tags;
         $categories = Category::pluck('id','name');
         return view('Admin.posts.edit',compact('post','categories'));
     }
