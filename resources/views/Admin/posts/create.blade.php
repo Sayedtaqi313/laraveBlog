@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="{{ asset('dashboard/assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}">
     <link href="{{ asset('dashboard/assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('dashboard/assets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
-<<<<<<< HEAD
     <link href="{{ asset('dashboard/assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
     <style>
         .messages {
@@ -13,34 +12,18 @@
             border-radius: 5px;
             z-index: 100 !important;
             max-width: 30%;
-=======
-    <style>
-        .messages{
-            position: fixed;
-            left:70%;
-            border-radius: 5px;
-            z-index: 100 !important;
-            max-width:30%;
->>>>>>> sayed
         }
     </style>
 @endsection
 
 @section('wrapper')
     @if (session()->has('success'))
-<<<<<<< HEAD
         <div class="messages alert alert-success">
             <strong>Success </strong> <span>{{ session()->get('success') }}</span>
         </div>
     @endif
 
-=======
-    <div class="messages alert alert-success">
-        <strong>Success </strong> <span>{{ session()->get('success') }}</span>
-    </div> 
-    @endif
-    
->>>>>>> sayed
+
     <div class="page-wrapper">
         <div class="page-content">
             <!--breadcrumb-->
@@ -59,33 +42,21 @@
                                     <div class="border border-3 p-4 rounded">
                                         <div class="mb-3">
                                             <label for="inputProductTitle" class="form-label">Post Title</label>
-                                            <input type="text" class="form-control" id="inputProductTitle"
-<<<<<<< HEAD
-                                                placeholder="Enter post title" name="title" value="{{ old('titile') }}">
-                                            @error('title')
-                                                <small class="text-danger">{{ $message }}</small>
-                                            @enderror
-=======
-                                                placeholder="Enter post title" name="title" value="{{ old('title') }}">
+                                            <input type="text" class="form-control" id="inputProductTitle" placeholder="Enter post title" name="title" value="{{ old('title') }}">
                                                 @error('title')
                                                     <small class="text-danger">{{ $message }}</small>
                                                 @enderror
->>>>>>> sayed
                                         </div>
                                         <div class="mb-3">
                                             <label for="inputProductDescription" class="form-label">Post Excerpt</label>
                                             <textarea class="form-control" id="inputProductDescription" rows="3" name="excerpt">
                                                 {{ old('excerpt') }}
                                             </textarea>
-<<<<<<< HEAD
+
                                             @error('excerpt')
                                                 <small class="text-danger">{{ $message }}</small>
                                             @enderror
-=======
-                                           @error('excerpt')
-                                           <small class="text-danger">{{ $message }}</small>
-                                           @enderror
->>>>>>> sayed
+
                                         </div>
                                         <div class="mb-3">
 
@@ -94,16 +65,10 @@
                                                     <div class="border p-3 rounded">
                                                         <div class="mb-3">
                                                             <label class="form-label">Post Category</label>
-<<<<<<< HEAD
-                                                            <select class="single-select" name="category_id">
-                                                                @foreach ($categories as $key => $value)
-                                                                    <option value="{{ $value }}">
-                                                                        {{ $key }}
-=======
+
                                                             <select class="single-select" name="category_id"> 
                                                                 @foreach ($categories as $key => $value)
                                                                     <option value="{{ $value }}">{{ $key }}
->>>>>>> sayed
                                                                     </option>
                                                                 @endforeach
 
@@ -119,13 +84,10 @@
 
                                         </div>
                                         <div class="mb-3">
-<<<<<<< HEAD
                                             <label class="form-label">Add Tags</label>
                                             <input type="text" class="form-control" name="tags" data-role="tagsinput">
                                         </div>
                                         <div class="mb-3">
-=======
->>>>>>> sayed
                                             <label for="inputProductDescription" class="form-label">Post Content</label>
                                             <textarea class="form-control post_content" id="inputProductDescription" name="body" rows="3">
                                                 {{ old('body') }}
@@ -146,11 +108,6 @@
                                         </div>
                                     </div>
                                 </div>
-<<<<<<< HEAD
-
-=======
-                               
->>>>>>> sayed
                             </div><!--end row-->
                         </form>
                     </div>
@@ -164,16 +121,13 @@
 @endsection
 
 @section('script')
-<<<<<<< HEAD
     <script src="https://cdn.tiny.cloud/1/idyan625klqknxfb5ckyuxck1g00rzuh3bi9rw9qmyxb43fe/tinymce/7/tinymce.min.js"
         referrerpolicy="origin"></script>
     <script src="{{ asset('dashboard/assets/plugins/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
-=======
     <script src="https://cdn.tiny.cloud/1/idyan625klqknxfb5ckyuxck1g00rzuh3bi9rw9qmyxb43fe/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="{{ asset('dashboard/assets/plugins/select2/js/select2.min.js') }}"></script>
 
->>>>>>> sayed
     <script src="{{ asset('dashboard/assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
     <script>
         $(document).ready(function() {

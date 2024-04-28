@@ -2,6 +2,7 @@
 
 @section('style')
     <link href="{{ asset('dashboard/assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('dashboard/assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
     <link href="{{ asset('dashboard/assets/plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
     <style>
         .messages{
@@ -110,6 +111,10 @@
 
                                         </div>
                                         <div class="mb-3">
+                                            <label class="form-label">Edit Tags</label>
+                                            <input type="text" class="form-control" name="tags" data-role="tagsinput" value="{{ $tags }}">
+                                        </div>
+                                        <div class="mb-3">
                                             <label for="inputProductDescription" class="form-label">Post Content</label>
                                             <textarea class="form-control post_content" id="inputProductDescription" name="body" rows="7">
                                                 {{ old('body',$post->body) }}
@@ -150,7 +155,7 @@
 
 @section('script')
     <script src="{{ asset('dashboard/assets/plugins/select2/js/select2.min.js') }}"></script>
-
+    <script src="{{ asset('dashboard/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
     <script src="{{ asset('dashboard/assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
     <script>
         $(document).ready(function() {

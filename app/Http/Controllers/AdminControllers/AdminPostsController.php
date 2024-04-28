@@ -7,6 +7,7 @@ use App\Http\Requests\PostRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -43,17 +44,15 @@ class AdminPostsController extends Controller
                 "path" => $path
             ]);
 
-
             $tags = explode(',',$postRequest->input('tags'));
             if(count($tags)){
                 $tags_id = [];
                 foreach($tags as $tag) {
-                  $tag_ob = $post->tags()->create(
-                        ['name' => $tag]
+                  $tag_ob = Tag::create(
+                        ['name' => trim($tag)]
                     );
                     $tags_id[] = $tag_ob->id;
                 }
-                
                 $post->tags()->sync($tags_id);
             }
 
@@ -63,12 +62,17 @@ class AdminPostsController extends Controller
         }
     }
 
-    public function edit(Post $post) {
-
-        return $post->tags;
-
+    public function edit(Post $post) {  
+        $postTags = $post->tags;
+        $tags = [];
+        if(count($postTags) > -1) {
+            foreach($postTags as $tag) {
+                $tags[] = $tag->name;
+            }
+        }
+        $tags = implode(",",$tags);
         $categories = Category::pluck('id','name');
-        return view('Admin.posts.edit',compact('post','categories'));
+        return view('Admin.posts.edit',compact('post','categories','tags'));
     }
 
     public function update(PostUpdateRequest $request,Post $post) {
@@ -79,7 +83,24 @@ class AdminPostsController extends Controller
             "body" => $request->body,
             "category_id" => $request->category_id,
         ]);
-        
+
+        $tags = explode(',',$request->input('tags'));
+        if(count($tags)){
+            $tags_id = [];
+            foreach($tags as $tag) {
+              $tag_exists = $post->tags()->where('name','=',trim($tag))->count();
+              if($tag_exists == 0) {
+                $tag_ob = Tag::create(
+                    ['name' => trim($tag)]
+                );
+
+                $tags_id[] = $tag_ob->id;
+              }
+             
+            }
+            $post->tags()->syncWithoutDetaching($tags_id);
+        }
+
             if($request->has('thumbnail')){
                 $oldImage = $post->image->path;
                 unlink('storage/'.$oldImage);
@@ -93,6 +114,7 @@ class AdminPostsController extends Controller
                     "path" => $path
                 ]);
 
+
                 return redirect()->route('admin.post.edit',$post)->with('success','the post updated successfully');
             }
             return redirect()->route('admin.post.edit',$post)->with('success','the post updated successfully');
@@ -101,6 +123,7 @@ class AdminPostsController extends Controller
 
     public function delete(Post $post) {
         if($post){
+            $post->tags()->delete();
             $post->delete();
             return redirect()->route('admin.posts')->with('success','the post deleted successfully');
         }else {

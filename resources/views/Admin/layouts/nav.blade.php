@@ -36,8 +36,6 @@
                 </li>
 
                 <li>
-<<<<<<< HEAD
-=======
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class='bx bx-menu'></i>
                         </div>
@@ -54,7 +52,19 @@
                 </li>
 
                 <li>
->>>>>>> sayed
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><i class='bx bx-purchase-tag'></i>
+                        </div>
+                        <div class="menu-title">Tags</div>
+                    </a>
+
+                    <ul>
+                        <li> <a href="{{ route('admin.tags') }}"><i class="bx bx-right-arrow-alt"></i>All Tags</a>
+                        </li> 
+                    </ul>
+                </li>
+                <li>
+
                     <a class="has-arrow" href="javascript:;">
                         <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
                         </div>

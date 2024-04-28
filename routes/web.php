@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\AdminControllers\AdminTagContoller;
 
 
 use App\Http\Controllers\AdminControllers\AdminCategoryController;
@@ -57,5 +58,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','isAdmin'])->group(fu
 
     Route::resource('categories', AdminCategoryController::class);
 
+    Route::get('tags',[AdminTagContoller::class,'index'])->name('tags');
+    Route::get('tags/{tag}/show',[AdminTagContoller::class,'show'])->name('tags.show');
+    Route::delete('tags/{tag}/destroy',[AdminTagContoller::class,'destroy'])->name('tags.destroy');
+    
     Route::post('upload_tinymce_image',[TinyMCEController::class,'upload_tinymce_image'])->name('upload_tinymce_image');
 });

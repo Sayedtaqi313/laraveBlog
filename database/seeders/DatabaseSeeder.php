@@ -29,20 +29,14 @@ class DatabaseSeeder extends Seeder
             $user->image()->save(Image::factory()->make());
         }
         foreach($posts as $post) {
-<<<<<<< HEAD
-=======
-          
->>>>>>> sayed
+
             $tags_id = [];
             $tags_id[] = \App\Models\Tag::all()->random()->id;
             $tags_id[] = \App\Models\Tag::all()->random()->id;
             $tags_id[] = \App\Models\Tag::all()->random()->id;
             $post->tags()->sync($tags_id);
             $post->image()->save(Image::factory()->make());
-<<<<<<< HEAD
-=======
-           
->>>>>>> sayed
+
         }
     }
 }
