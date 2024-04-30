@@ -9,18 +9,13 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class RoleFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public  $count = 0;
+  
+    public  $number = 0;
     public function definition()
     {
-        $roleName = ['admin','author','user'];
         return [
             //
-            'name' => $roleName[fake()->numberBetween(0,2)],
+            'name' => "admin"
         ];
     }
 }

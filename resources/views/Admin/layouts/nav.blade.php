@@ -13,7 +13,7 @@
             <!--navigation-->
             <ul class="metismenu" id="menu">
                 <li>
-                    <a href="" target="_blank">
+                    <a href="{{ route('admin.home') }}" target="_blank">
                     <div class="parent-icon"><i class='bx bx-home-circle'></i></div>
                         <div class="menu-title">Dashboard</div>
                     </a>
@@ -75,6 +75,21 @@
                         <li> <a href="{{ route('admin.comments') }}"><i class="bx bx-right-arrow-alt"></i>All Comments</a>
                         </li> 
                         <li> <a href="{{ route('admin.comment.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Comment</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><i class='bx bx-key'></i>
+                        </div>
+                        <div class="menu-title">Roles</div>
+                    </a>
+
+                    <ul>
+                        <li> <a href="{{ route('admin.roles') }}"><i class="bx bx-right-arrow-alt"></i>All Roles</a>
+                        </li> 
+                        <li> <a href="{{ route('admin.role.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New Role</a>
                         </li>
                     </ul>
                 </li>

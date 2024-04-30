@@ -4,11 +4,13 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminControllers\AdminCommentController;
 use App\Http\Controllers\AdminControllers\AdminPostsController;
+use App\Http\Controllers\AdminControllers\AdminRoleController;
 use App\Http\Controllers\AdminControllers\DashboardController;
 use App\Http\Controllers\AdminControllers\AdminTagContoller;
 use App\Http\Controllers\AdminControllers\AdminCategoryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\SayedController;
 use Database\Factories\CategoryFactory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -46,7 +48,7 @@ Route::get('tags/{tag}',[TagController::class,'show'])->name('tag.show');
 
 //Admin routes
 
-Route::prefix('admin')->name('admin.')->middleware(['auth','isAdmin'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth','isAdmin','checkPermission'])->group(function () {
     Route::get('/',[DashboardController::class,'index'])->name('home');
     Route::get('posts',[AdminPostsController::class,'index'])->name('posts');
     Route::get('posts/create',[AdminPostsController::class,'create'])->name('post.create');
@@ -63,12 +65,19 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','isAdmin'])->group(fu
 
     Route::get('comments',[AdminCommentController::class,'index'])->name('comments');
     Route::get('comments/create',[AdminCommentController::class,'create'])->name('comment.create');
-    Route::post('comments/{comment/store',[AdminCommentController::class,'store'])->name('comment.store');
+    Route::post('comments',[AdminCommentController::class,'store'])->name('comment.store');
     Route::get("comments/{comment}/edit",[AdminCommentController::class,'edit'])->name('comment.edit');
     Route::patch('comments/{comment}/update',[AdminCommentController::class,'update'])->name('comment.update');
     Route::get('comments/{comment}/show',[AdminCommentController::class,'show'])->name('comment.show');
     Route::delete('comments/{comment}/delete',[AdminCommentController::class,'delete'])->name('comment.delete');
 
+    Route::get('roles',[AdminRoleController::class,'index'])->name('roles');
+    Route::get('roles/create',[AdminRoleController::class,'create'])->name('role.create');
+    Route::post('roles',[AdminRoleController::class,'store'])->name('role.store');
+    Route::get('roles/{role}/edit',[AdminRoleController::class,'edit'])->name('role.edit');
+    Route::patch('roles/{role}/update',[AdminRoleController::class,'update'])->name('role.update');
+    Route::delete('roles/{role}/delete',[AdminRoleController::class,'delete'])->name('role.delete');
     
     Route::post('upload_tinymce_image',[TinyMCEController::class,'upload_tinymce_image'])->name('upload_tinymce_image');
 });
+
