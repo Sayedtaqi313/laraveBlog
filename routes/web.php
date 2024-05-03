@@ -5,9 +5,11 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminControllers\AdminCommentController;
 use App\Http\Controllers\AdminControllers\AdminPostsController;
 use App\Http\Controllers\AdminControllers\AdminRoleController;
+use App\Http\Controllers\AdminControllers\AdminUserController;
 use App\Http\Controllers\AdminControllers\DashboardController;
 use App\Http\Controllers\AdminControllers\AdminTagContoller;
 use App\Http\Controllers\AdminControllers\AdminCategoryController;
+use App\Http\Controllers\AdminControllers\AdminContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SayedController;
@@ -48,7 +50,7 @@ Route::get('tags/{tag}',[TagController::class,'show'])->name('tag.show');
 
 //Admin routes
 
-Route::prefix('admin')->name('admin.')->middleware(['auth','isAdmin','checkPermission'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth','checkPermission'])->group(function () {
     Route::get('/',[DashboardController::class,'index'])->name('home');
     Route::get('posts',[AdminPostsController::class,'index'])->name('posts');
     Route::get('posts/create',[AdminPostsController::class,'create'])->name('post.create');
@@ -78,6 +80,17 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','isAdmin','checkPermi
     Route::patch('roles/{role}/update',[AdminRoleController::class,'update'])->name('role.update');
     Route::delete('roles/{role}/delete',[AdminRoleController::class,'delete'])->name('role.delete');
     
+    Route::get('users',[AdminUserController::class,'index'])->name('users');
+    Route::get('users/create',[AdminUserController::class,'create'])->name('user.create');
+    Route::post('users',[AdminUserController::class,'store'])->name('user.store');
+    Route::get('users/{user}/edit',[AdminUserController::class,'edit'])->name('user.edit');
+    Route::put('users/{user}',[AdminUserController::class,'update'])->name('user.update');
+    Route::get('users/{user}/show',[AdminUserController::class,'show'])->name('user.show');
+    Route::delete('users/{user}',[AdminUserController::class,'delete'])->name('user.delete');
+
+    Route::get('contacts',[AdminContactController::class,'index'])->name('contacts');
+    Route::delete('contacts/{contact}',[AdminContactController::class,'delete'])->name('contact.delete');
+
     Route::post('upload_tinymce_image',[TinyMCEController::class,'upload_tinymce_image'])->name('upload_tinymce_image');
 });
 

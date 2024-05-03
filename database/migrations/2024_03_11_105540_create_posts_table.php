@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string("status")->default("published");
             $table->unsignedBigInteger('user_id');
             $table->foreignId('category_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
