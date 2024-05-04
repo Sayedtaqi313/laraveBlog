@@ -102,19 +102,30 @@ class AdminPostsController extends Controller
         }
 
             if($request->has('thumbnail')){
-                $oldImage = $post->image->path;
-                unlink('storage/'.$oldImage);
-                $thumbnail = $request->file('thumbnail');
-                $filename = $thumbnail->getClientOriginalName();
-                $fileEx = $thumbnail->getClientOriginalExtension();
-                $path = $thumbnail->store('images/posts','public');
-                $post->image()->update([
-                    "name" => $filename,
-                    "extension" => $fileEx,
-                    "path" => $path
-                ]);
-
-
+                if($post->image){
+                    $oldImage = $post->image->path;
+                    unlink('storage/'.$oldImage);
+                    $thumbnail = $request->file('thumbnail');
+                    $filename = $thumbnail->getClientOriginalName();
+                    $fileEx = $thumbnail->getClientOriginalExtension();
+                    $path = $thumbnail->store('images/posts','public');
+                    $post->image()->update([
+                        "name" => $filename,
+                        "extension" => $fileEx,
+                        "path" => $path
+                    ]);
+                }else {
+                    $thumbnail = $request->file('thumbnail');
+                    $filename = $thumbnail->getClientOriginalName();
+                    $fileEx = $thumbnail->getClientOriginalExtension();
+                    $path = $thumbnail->store('images/posts','public');
+                    $post->image()->create([
+                        "name" => $filename,
+                        "extension" => $fileEx,
+                        "path" => $path
+                    ]);
+                }
+            
                 return redirect()->route('admin.post.edit',$post)->with('success','the post updated successfully');
             }
             return redirect()->route('admin.post.edit',$post)->with('success','the post updated successfully');

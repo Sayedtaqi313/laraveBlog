@@ -132,7 +132,7 @@
                                         </div>
                                         <div class="mb-3 img-card">
                                            <div class="card" style="width:200px">
-                                            <img src="{{ asset('storage/'.$post->image->path) }}" class="img-responsive">
+                                            <img src="{{ $post->image ? asset('storage/'.$post->image->path) : '' }}" class="img-responsive">
                                            </div>
                                         </div>
                                         <div class="mb-3">

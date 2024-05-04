@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
          \App\Models\Category::factory(20)->create();
         $posts = \App\Models\Post::factory(100)->create();
          \App\Models\Comment::factory(500)->create();
-
+         \App\Models\About::factory(1)->create();
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',

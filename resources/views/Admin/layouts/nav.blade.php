@@ -118,6 +118,18 @@
                 <div class="menu-title">Contacts</div>
             </a>
         </li>
+        <li>
+            <a href="{{ route('admin.about') }}">
+                <div class="parent-icon"><i class='bx bx-info-square'></i></div>
+                <div class="menu-title">About</div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('home') }}" target="_blank">
+                <div class="parent-icon"><i class='bx bx-pointer'></i></div>
+                <div class="menu-title">Main Page</div>
+            </a>
+        </li>
     </ul>
     <!--end navigation-->
 </div>

@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AdminControllers\AdminAboutController;
 use App\Http\Controllers\AdminControllers\AdminCommentController;
 use App\Http\Controllers\AdminControllers\AdminPostsController;
 use App\Http\Controllers\AdminControllers\AdminRoleController;
@@ -90,6 +91,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','checkPermission'])->
 
     Route::get('contacts',[AdminContactController::class,'index'])->name('contacts');
     Route::delete('contacts/{contact}',[AdminContactController::class,'delete'])->name('contact.delete');
+
+    Route::get('about',[AdminAboutController::class,'index'])->name('about');
+    Route::put('about/{about}/update',[AdminAboutController::class,'update'])->name('about.update');
 
     Route::post('upload_tinymce_image',[TinyMCEController::class,'upload_tinymce_image'])->name('upload_tinymce_image');
 });

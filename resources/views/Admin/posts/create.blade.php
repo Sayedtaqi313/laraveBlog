@@ -123,7 +123,6 @@
 @section('script')
     <script src="{{ asset('dashboard/assets/plugins/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
-    <script src="https://cdn.tiny.cloud/1/idyan625klqknxfb5ckyuxck1g00rzuh3bi9rw9qmyxb43fe/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="{{ asset('dashboard/assets/plugins/select2/js/select2.min.js') }}"></script>
 
     <script src="{{ asset('dashboard/assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
