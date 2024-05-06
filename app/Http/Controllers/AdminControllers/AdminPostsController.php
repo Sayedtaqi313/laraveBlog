@@ -104,7 +104,9 @@ class AdminPostsController extends Controller
             if($request->has('thumbnail')){
                 if($post->image){
                     $oldImage = $post->image->path;
-                    unlink('storage/'.$oldImage);
+                    if(file_exists($oldImage)){
+                        unlink($oldImage);
+                    }
                     $thumbnail = $request->file('thumbnail');
                     $filename = $thumbnail->getClientOriginalName();
                     $fileEx = $thumbnail->getClientOriginalExtension();

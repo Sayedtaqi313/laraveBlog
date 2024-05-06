@@ -6,6 +6,8 @@ use App\Models\About;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Schema;
+
 use App\Models\Category;
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,9 +28,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         Paginator::useBootstrap();
-        View::share('topCategories',Category::withCount('posts')->orderBy('posts_count','desc')->take(5)->get());
-        View::share('about',About::first());
+
+       if(Schema::hasTable('categories')){
+            View::share('topCategories',Category::withCount('posts')->orderBy('posts_count','desc')->take(5)->get());
+            View::share('about',About::first());
+        }
+        
     }
 }

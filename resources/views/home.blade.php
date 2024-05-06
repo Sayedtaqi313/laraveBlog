@@ -10,7 +10,7 @@
                     @foreach ($posts as $post)
                         <div class="block-21 d-flex animate-box">
                             <a href="{{ route('show.post', ['slug' => $post->slug]) }}" class="blog-img"
-                                style="background-image: url('{{ $post->image ? '/storage/'.$post->image->path : '' }}');"></a>
+                                style="background-image: url('{{ $post->image ? '/storage/'.$post->image->path : asset('storage/images/placeholder/post.png') }}');"></a>
                             <div class="text">
                                 <h3 class="heading"><a href="#">{{ $post->title }}</a></h3>
                                 <p>{{ $post->excerpt }}</p>
